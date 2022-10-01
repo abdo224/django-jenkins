@@ -3,7 +3,10 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-               sh 'docker build -t djawed22/repo:latest .'
+              def customImage =  docker.build('djawed22/repo:latest')
+              customImage.inside {
+                sh 'echo "Hello World"'
+              }
             }
         }
     }
