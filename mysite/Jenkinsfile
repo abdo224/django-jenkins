@@ -6,6 +6,7 @@ pipeline {
                agent {
                 dockerfile {
                     filename 'Dockerfile'
+                    args '-t djawed22/repo:latest'
                     
                 }
                }
