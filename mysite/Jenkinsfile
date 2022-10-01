@@ -1,12 +1,12 @@
 pipeline {
-   agent any
+    agent { dockerfile true }
     stages {
-        stage('Build docker image') {
+        stage('Test') {
             steps {
-                sh 'docker build -t djawed22/repo:latest .'
+               success {
+                   echo 'Success'
+               }
             }
         }
-       
     }
-
 }
