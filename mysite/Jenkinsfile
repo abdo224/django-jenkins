@@ -1,15 +1,9 @@
 pipeline {
-    agent none
+    agent {dockerfile true}
     stages {
         stage('Build') {
             steps {
-               agent {
-                dockerfile {
-                    filename 'Dockerfile'
-                    args '-t djawed22/repo:latest'
-                    
-                }
-               }
+               sh 'docker build -t djawed22/repo:latest .'
             }
         }
     }
