@@ -1,11 +1,10 @@
 pipeline {
-    node {
-    checkout scm
-
-    def customImage = docker.build("djawed22/repo:latest")
-
-    customImage.inside {
-        sh 'echo "Hello World"'
+   agent any
+    stages {
+      stage('Build docker image') {
+        steps {
+            sh 'docker build -t djawed22/repo:latest .'
+        }
+      }
     }
-}
 }
