@@ -1,10 +1,11 @@
-pipeline {
-   agent any
-    stages {
-      stage('Build docker image') {
-        steps {
-            sh 'docker build -t djawed22/repo:latest .'
+node {
+    def IMAGE = "djawed22/repo:latest"
+    stage('clone'){
+        git 'https://github.com/abdo224/django-jenkins.git'
         }
-      }
-    }
+    def img = stage('build') {
+        docker.build("IMAGE", ".")
+        }
+        
+        
 }
