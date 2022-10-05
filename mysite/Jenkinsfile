@@ -4,7 +4,10 @@ pipeline {
 
     stage('Build Image') {
       steps {
-        sh "docker build -t djawed22/repo:latest ."
+        dir('./mysite') {
+         sh "docker build -t djawed22/repo:latest ."
+        }
+        
 
       }
     }
