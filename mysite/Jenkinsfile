@@ -1,11 +1,20 @@
-node {
-    def IMAGE = "djawed22/repo:latest"
-    stage('clone'){
-        git 'https://github.com/abdo224/django-jenkins.git'
+pipeline {
+    agent any
+    stages {
+       
+        stage('Build Image') {
+            steps {
+                //sh "docker build -t djawed22/repo:latest ."
+               def img =  docker.build ' djawed22/repo:latest'
+               img.push()
+
+            }
         }
-    def img = stage('build') {
-        docker.build("IMAGE", ".")
+        stage('test') {
+            steps {
+               // sh "docker push djawed22/repo:latest"
+            }
         }
-        
-        
+      
+    }
 }
