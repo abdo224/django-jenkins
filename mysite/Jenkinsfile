@@ -1,20 +1,22 @@
 pipeline {
-    agent any
-    stages {
-       
-        stage('Build Image') {
-            steps {
-                //sh "docker build -t djawed22/repo:latest ."
-               def img =  docker.build ' djawed22/repo:latest'
-               img.push()
+  agent any
+  stages {
 
-            }
-        }
-        stage('test') {
-            steps {
-               // sh "docker push djawed22/repo:latest"
-            }
-        }
-      
+    stage('Build Image') {
+      steps {
+        sh "docker build -t djawed22/repo:latest ."
+
+      }
     }
+    stage('test') {
+      steps {
+        // sh "docker push djawed22/repo:latest"
+        withCredentials([usernamePassword(credentialsId: 'docker_hub_account', passwordVariable: 'pwd', usernameVariable: 'user')]) {
+          sh "docker login -u ${env.user} -p ${env.pwd}"
+          sh 'docker push djawed22/repo:latest'
+        }
+      }
+    }
+
+  }
 }
