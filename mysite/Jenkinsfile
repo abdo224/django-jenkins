@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-
+    // build the docker image
     stage('Build Image') {
       steps {
         dir('./mysite') {
@@ -11,14 +11,16 @@ pipeline {
 
       }
     }
+    // test the docker image
     stage('Test Image Building') {
       steps {
-        sh "docker ps "
+        sh "docker images "
       }
     }
+    // push the docker image to docker hub
     stage('push image') {
       steps {
-        // sh "docker push djawed22/repo:latest"
+        
         withCredentials([usernamePassword(credentialsId: 'docker_hub_account', passwordVariable: 'pwd', usernameVariable: 'user')]) {
           sh "docker login -u ${env.user} -p ${env.pwd}"
           sh 'docker push djawed22/repo:latest'
