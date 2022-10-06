@@ -5,9 +5,8 @@ pipeline {
     stage('Build Image') {
       steps {
         dir('./mysite') {
-         sh "docker build -t djawed22/repo:latest ."
+          sh "docker build -t djawed22/repo:latest ."
         }
-        
 
       }
     }
@@ -20,22 +19,24 @@ pipeline {
     // push the docker image to docker hub
     stage('push image') {
       steps {
-        
+
         withCredentials([usernamePassword(credentialsId: 'docker_hub_account', passwordVariable: 'pwd', usernameVariable: 'user')]) {
           sh "docker login -u ${env.user} -p ${env.pwd}"
           sh 'docker push djawed22/repo:latest'
         }
       }
     }
+    // deploy the docker image with docker-compose 
     stage("Deploy") {
       steps {
-       dir('./mysite') { 
-        sh "docker-compose up -d db"
-        sh "sleep 10"
-        sh "docker-compose up -d app"
+        dir('./mysite') {
+          sh "docker-compose up -d db"
+          sh "sleep 10"
+          sh "docker-compose up -d app"
 
+        }
       }
-    }
 
+    }
   }
 }
