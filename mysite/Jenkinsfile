@@ -11,7 +11,12 @@ pipeline {
 
       }
     }
-    stage('test') {
+    stage('Test Image Building') {
+      steps {
+        sh "docker ps "
+      }
+    }
+    stage('push image') {
       steps {
         // sh "docker push djawed22/repo:latest"
         withCredentials([usernamePassword(credentialsId: 'docker_hub_account', passwordVariable: 'pwd', usernameVariable: 'user')]) {
