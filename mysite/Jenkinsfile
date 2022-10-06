@@ -29,9 +29,11 @@ pipeline {
     }
     stage("Deploy") {
       steps {
+       dir('./mysite') { 
         sh "docker-compose up -d db"
         sh "sleep 10"
         sh "docker-compose up -d app"
+
       }
     }
 
