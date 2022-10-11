@@ -26,18 +26,6 @@ pipeline {
         }
       }
     }
-    // deploy the docker image with docker-compose 
-    stage("Deploy") {
-      steps {
-        dir('./mysite') {
-          sh "docker-compose down"
-          sh "docker-compose up -d db"
-          sh "sleep 20"
-          sh "docker-compose up -d app"
-
-        }
-      }
-
-    }
+    
   }
 }
