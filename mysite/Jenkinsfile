@@ -26,6 +26,13 @@ pipeline {
         }
       }
     }
+    stage('run image') {
+      steps {
+        sh "docker-compose up -d db "
+        sh "docker-compose up -d app "
+      }
+    }
+    
     
   }
 }
