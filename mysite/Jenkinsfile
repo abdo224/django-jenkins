@@ -32,6 +32,7 @@ pipeline {
          sh "docker-compose up -d db "
          sleep 30
          sh "docker-compose run --rm app python manage.py migrate"
+         sh "docker-compose up -d app"
        }
       }
     }
