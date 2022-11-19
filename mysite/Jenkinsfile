@@ -3,14 +3,14 @@ pipeline {
   stages {
     stage('Stop running containers') {
       steps {
-        sh 'docker rmi $(docker images | grep "djawed22/repo")'
+        sh 'docker stop $(docker ps -a -q)'
       }
     }
       
     
     stage('remove image locally ') {
       steps {
-        sh 'docker rmi -f djawed/repo:latest'
+        sh 'docker rmi $(docker images | grep "djawed22/repo")'
       }
     }
     // build the docker image
