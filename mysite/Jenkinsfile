@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Stop running containers') {
       steps {
-        sh "docker rmi $(docker images | grep 'djawed22/repo')"
+        sh 'docker rmi $(docker images | grep "djawed22/repo")'
       }
     }
       
