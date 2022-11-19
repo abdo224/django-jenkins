@@ -7,7 +7,7 @@ pipeline {
       }
     }
       
-    }
+    
     stage('remove image locally ') {
       steps {
         sh 'docker rmi -f djawed/repo:latest'
@@ -48,7 +48,6 @@ pipeline {
        }
       }
     }
+} 
     
-    
-  }
 }
