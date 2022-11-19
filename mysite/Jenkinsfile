@@ -1,6 +1,11 @@
 pipeline {
   agent any
   stages {
+    stage('remove images') {
+      steps {
+        sh 'docker rmi -f $(docker images -q)'
+      }
+    }
     // build the docker image
     stage('Build Image') {
       steps {
