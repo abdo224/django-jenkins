@@ -11,7 +11,7 @@ pipeline {
     
     stage('remove image locally ') {
       steps {
-        sh 'docker rmi $(docker images | grep "djawed22/repo")'
+        sh 'docker rmi $(docker images | grep "djawed22/repo" -q)'
       }
     }
     // build the docker image
