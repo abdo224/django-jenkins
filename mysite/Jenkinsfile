@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('remove images') {
       steps {
-        sh 'docker rmi -f $(docker images -q)'
+        sh 'docker rmi -f djawed/repo:latest'
       }
     }
     // build the docker image
@@ -34,7 +34,7 @@ pipeline {
     stage('run image') {
       steps {
        dir('./mysite') { 
-         sh "docker-compose up -d db "
+         //sh "docker-compose up -d db "
          sleep 30
          sh "docker-compose run --rm app python manage.py migrate"
          sh "docker-compose up -d app"
