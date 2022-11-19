@@ -3,17 +3,17 @@ pipeline {
   stages {
     stage('Stop running containers') {
       steps {
-        sh 'echo 1'
-        //sh 'docker stop $(docker ps -a -q)'
-        //sh 'docker rm $(docker ps -a -q)'
+     
+        sh 'docker stop $(docker ps -a -q)'
+        sh 'docker rm $(docker ps -a -q)'
       }
     }
       
     
     stage('remove image locally ') {
       steps {
-        //sh 'docker rmi $(docker images | grep "djawed22/repo" -q)'
-        sh 'echo 2'
+        sh 'docker rmi $(docker images | grep "djawed22/repo" -q)'
+       
       }
     }
     // build the docker image
