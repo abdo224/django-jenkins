@@ -3,6 +3,7 @@ pipeline {
   stages {
     stage('Stop running containers') {
       steps {
+        sh 'echo 1'
         //sh 'docker stop $(docker ps -a -q)'
         //sh 'docker rm $(docker ps -a -q)'
       }
