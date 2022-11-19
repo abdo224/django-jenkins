@@ -1,7 +1,14 @@
 pipeline {
   agent any
   stages {
-    stage('remove images') {
+    stage('Stop running containers') {
+      steps {
+        sh 'docker stop $(docker ps -a -q)'
+      }
+    }
+      
+    }
+    stage('remove image locally ') {
       steps {
         sh 'docker rmi -f djawed/repo:latest'
       }
@@ -34,8 +41,8 @@ pipeline {
     stage('run image') {
       steps {
        dir('./mysite') { 
-         //sh "docker-compose up -d db "
-         sleep 30
+         sh "docker-compose up -d db "
+         sh "sleep 30"
          sh "docker-compose run --rm app python manage.py migrate"
          sh "docker-compose up -d app"
        }
